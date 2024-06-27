@@ -12,13 +12,13 @@ app = Flask("DFvision")
 app = Flask(__name__)
 app.config['SEND_TIMEOUT'] = 180
 
-# Rota para o index (menu)
+# Rota live
 @app.route('/', methods=['GET'])
 def index():
     return "It's live"
 
 
-# Rota para o AI Product Enrichment
+# Rota para categorizar produto
 @app.route('/verificaImage', methods=['POST'])
 def verificaImage():
     data = request.json
@@ -30,6 +30,8 @@ def verificaImage():
             return jsonify({'error': 'No image_url provided'}), 400
     predicted_class = classifier.predict(image_url)
     return jsonify({'predicted_class': predicted_class})
+
+
 
 if __name__ == '__main__':
     cors = CORS(app, resources={r"": {"origins": ""}})
