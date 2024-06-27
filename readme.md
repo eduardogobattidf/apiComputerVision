@@ -22,6 +22,12 @@ Para começar, você precisa ter o Python instalado em sua máquina. Você pode 
 
    ```bash
    python -m venv .venv
+   ```
+### Passo 4: Ative o ambiente virtual:
 
+No Windows:
+```bash
+   .venv\Scripts\activate
+   ```
 
 
