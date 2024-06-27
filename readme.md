@@ -16,12 +16,12 @@ Para começar, você precisa ter o Python instalado em sua máquina. Você pode 
 
    ```bash
    cd caminho/do/seu/projeto
-```
+´´´
 
 ### Passo 3: Crie um ambiente virtual:
 
    ```bash
    python -m venv .venv
-```
+´´´
 
 
