@@ -5,11 +5,12 @@ import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
+from src.tools.torch_category import ImageClassifier
+classifier = ImageClassifier()
+
+app = Flask("DFvision")
 app = Flask(__name__)
-
-CORS(app)
-
-
+app.config['SEND_TIMEOUT'] = 180
 
 # Rota para o index (menu)
 @app.route('/', methods=['GET'])
@@ -19,9 +20,18 @@ def index():
 
 # Rota para o AI Product Enrichment
 @app.route('/verificaImage', methods=['POST'])
-def ai_product_enrichment():
-    return 'ai_product_enrichment'
+def verificaImage():
+    data = request.json
 
+    image_url = data['image_url']
+    predicted_class = classifier.predict(image_url)
+    print(predicted_class)
+    if not image_url:
+            return jsonify({'error': 'No image_url provided'}), 400
+    predicted_class = classifier.predict(image_url)
+    return jsonify({'predicted_class': predicted_class})
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    cors = CORS(app, resources={r"": {"origins": ""}})
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port,debug=True)

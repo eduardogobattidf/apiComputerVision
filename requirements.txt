@@ -1,7 +1,5 @@
 Flask
 Flask-cors
-matplotlib
-tensorflow
-scikit-learn
-pillow
-keras
+requests
+torchvision
+torch
